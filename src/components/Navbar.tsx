@@ -34,9 +34,8 @@ export const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/95 backdrop-blur-sm border-b border-border" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/95 backdrop-blur-sm border-b border-border" : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -46,7 +45,7 @@ export const Navbar = () => {
             transition={{ delay: 0.2 }}
             className="font-bebas text-3xl text-foreground tracking-wider"
           >
-            KICKBOXING
+            SUA MARCA
           </motion.div>
 
           {/* Desktop Menu */}

@@ -65,7 +65,7 @@ export const Contact = () => {
                   E-MAIL
                 </h3>
                 <p className="font-montserrat text-sm text-muted-foreground">
-                  contato@kickboxingacademia.com.br
+                  contato@suaacademia.com
                 </p>
               </div>
             </div>
@@ -77,7 +77,7 @@ export const Contact = () => {
                   INSTAGRAM
                 </h3>
                 <p className="font-montserrat text-sm text-muted-foreground">
-                  @kickboxingacademia
+                  @suaacademia
                 </p>
               </div>
             </div>

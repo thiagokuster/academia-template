@@ -40,13 +40,10 @@ export const About = () => {
           className="text-center mb-16"
         >
           <h2 className="font-bebas text-5xl md:text-7xl text-foreground tracking-wider mb-6">
-            O QUE É KICKBOXING?
+            O que é Kickboxing?
           </h2>
           <p className="font-montserrat text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Kickboxing é uma arte marcial moderna que combina técnicas de soco do boxe com chutes potentes. 
-            É um treino completo que transforma corpo e mente, desenvolvendo força, agilidade, 
-            coordenação e confiança. Seja para defesa pessoal, competição ou condicionamento físico, 
-            o kickboxing oferece resultados incomparáveis.
+            O kickboxing é um esporte de combate que combina golpes de socos e chutes, reunindo técnicas de artes marciais como o karatê e o boxe. Praticado em pé, ele tem como objetivo atingir o adversário com golpes válidos para marcar pontos ou vencer por nocaute. Além de ser uma modalidade competitiva, o kickboxing também é muito procurado como atividade física, pois melhora o condicionamento, a disciplina e o bem-estar.
           </p>
         </motion.div>
 

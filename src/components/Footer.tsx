@@ -7,10 +7,10 @@ export const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="text-center md:text-left">
             <h3 className="font-bebas text-3xl text-foreground tracking-wider mb-2">
-              KICKBOXING
+              SUA MARCA
             </h3>
             <p className="font-montserrat text-sm text-muted-foreground">
-              Transformando vidas através da luta
+              Template pronto para personalizacao.
             </p>
           </div>
 
@@ -44,7 +44,7 @@ export const Footer = () => {
 
         <div className="mt-8 pt-8 border-t border-border text-center">
           <p className="font-montserrat text-xs text-muted-foreground">
-            © 2024 Kickboxing Academia. Todos os direitos reservados.
+            © 2026 Sua Marca. Todos os direitos reservados.
           </p>
         </div>
       </div>

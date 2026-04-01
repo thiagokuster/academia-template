@@ -7,21 +7,21 @@ import instructor3 from "@/assets/instructor-3.jpg";
 
 const instructors = [
   {
-    name: "RAFAEL SILVA",
-    title: "FAIXA PRETA | 15 ANOS DE EXPERIÊNCIA",
-    bio: "Campeão estadual e treinador certificado com experiência em competições nacionais e internacionais.",
+    name: "INSTRUTOR 01",
+    title: "FAIXA PRETA | EXPERIENCIA AVANCADA",
+    bio: "Profissional certificado com foco em tecnica, seguranca e evolucao dos alunos.",
     image: instructor1,
   },
   {
-    name: "MARINA COSTA",
-    title: "FAIXA PRETA | 12 ANOS DE EXPERIÊNCIA",
-    bio: "Especialista em defesa pessoal feminina e preparação física. Vice-campeã nacional de kickboxing.",
+    name: "INSTRUTORA 02",
+    title: "FAIXA PRETA | PREPARACAO FISICA",
+    bio: "Especialista em condicionamento, mobilidade e desenvolvimento progressivo.",
     image: instructor2,
   },
   {
-    name: "LUCAS FERREIRA",
-    title: "FAIXA PRETA | 18 ANOS DE EXPERIÊNCIA",
-    bio: "Mestre em técnicas de luta e condicionamento. Formou diversos campeões em sua carreira.",
+    name: "INSTRUTOR 03",
+    title: "FAIXA PRETA | PERFORMANCE",
+    bio: "Atua no aprimoramento tecnico e no preparo para treino recreativo ou competitivo.",
     image: instructor3,
   },
 ];

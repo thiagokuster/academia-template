@@ -6,41 +6,50 @@ import { Button } from "@/components/ui/button";
 
 const plans = [
   {
-    name: "BÁSICO",
-    price: "R$ 149",
+    name: "OURO",
+    price: "R$ 190",
     period: "/MÊS",
+    color: "#D4AF37", // Dourado
     features: [
-      "2x por semana",
-      "Acesso às aulas iniciante",
-      "Vestiário e armário",
-      "Avaliação física inicial",
+      "Treino 5x por semana.",
+      "Até 2 professores pré-determinados.",
     ],
+    message: "Olá! Tenho interesse no **Plano Ouro** (R$ 190/mês). Pode me explicar como funciona a inscrição, os horários e as formas de pagamento?",
   },
   {
-    name: "STANDARD",
-    price: "R$ 249",
+    name: "PRATA",
+    price: "R$ 150",
     period: "/MÊS",
+    color: "#A8A8A8", // Prateado
     features: [
-      "Treino ilimitado",
-      "Todas as aulas (exceto luta)",
-      "Vestiário e armário",
-      "Acompanhamento mensal",
-      "Acesso ao app de treinos",
+      "Treino 3x por semana.",
+      "Professores e horários fixos.",
     ],
     featured: true,
+    message: "Olá! Tenho interesse no **Plano Prata** (R$ 150/mês) - o mais popular. Pode me explicar como funciona a inscrição, os horários e as formas de pagamento?",
   },
   {
-    name: "PREMIUM",
-    price: "R$ 399",
+    name: "BRONZE",
+    price: "R$ 130",
     period: "/MÊS",
+    color: "#CD7F32", // Bronze
     features: [
-      "Treino ilimitado",
-      "Todas as aulas + luta",
-      "Personal fight training 1x/semana",
-      "Nutrição esportiva",
-      "Acesso prioritário",
-      "Suporte 24/7",
+      "Treino 2x por semana.",
+      "Professores e horários fixos.",
     ],
+    message: "Olá! Tenho interesse no **Plano Bronze** (R$ 130/mês). Pode me explicar como funciona a inscrição, os horários e as formas de pagamento?",
+  },
+  {
+    name: "CHAMPION",
+    price: "R$ 210",
+    period: "/MÊS",
+    color: "#3B82F6", // Azul
+    features: [
+      "Quantidade de treinos livres.",
+      "Maior flexibilidade.",
+      "Até 3 professores.",
+    ],
+    message: "Olá! Tenho interesse no **Plano Champion** (R$ 210/mês). Pode me explicar como funciona a inscrição, os horários e as formas de pagamento?",
   },
 ];
 
@@ -48,9 +57,10 @@ export const Pricing = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const handleContact = () => {
-    const element = document.querySelector("#contact");
-    element?.scrollIntoView({ behavior: "smooth" });
+  const handleSubscribe = (message: string) => {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/SEU_NUMERO_AQUI?text=${encodedMessage}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -77,21 +87,28 @@ export const Pricing = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`bg-card border-2 p-8 ${
-                plan.featured ? "border-accent" : "border-border"
-              } hover:border-accent transition-all duration-300 relative`}
+              className={`bg-card border-2 p-8 rounded-2xl relative transition-all duration-300 hover:scale-[1.02] hover:shadow-xl`}
+              style={{
+                borderColor: plan.featured ? plan.color : "#333",
+                boxShadow: plan.featured ? `0 0 25px ${plan.color}30` : "none",
+              }}
             >
               {plan.featured && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-accent px-4 py-1">
-                  <span className="font-montserrat text-xs font-bold text-foreground">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-accent px-6 py-1.5 rounded-full">
+                  <span className="font-montserrat text-xs font-bold text-foreground tracking-widest">
                     MAIS POPULAR
                   </span>
                 </div>
               )}
+
               <div className="text-center mb-8">
-                <h3 className="font-bebas text-3xl text-foreground tracking-wider mb-4">
+                <h3
+                  className="font-bebas text-3xl tracking-wider mb-4"
+                  style={{ color: plan.color }}
+                >
                   {plan.name}
                 </h3>
+
                 <div className="flex items-end justify-center gap-1">
                   <span className="font-bebas text-5xl text-foreground">
                     {plan.price}
@@ -101,19 +118,29 @@ export const Pricing = () => {
                   </span>
                 </div>
               </div>
-              <ul className="space-y-4 mb-8">
+
+              <ul className="space-y-4 mb-10">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+                    <Check
+                      className="w-5 h-5 flex-shrink-0 mt-0.5"
+                      style={{ color: plan.color }}
+                    />
                     <span className="font-montserrat text-sm text-muted-foreground">
                       {feature}
                     </span>
                   </li>
                 ))}
               </ul>
+
               <Button
-                onClick={handleContact}
-                className="w-full bg-primary hover:bg-accent font-montserrat font-semibold"
+                onClick={() => handleSubscribe(plan.message)}
+                className="w-full h-14 text-base font-semibold font-montserrat transition-all duration-300 hover:scale-105"
+                style={{
+                  backgroundColor: plan.color,
+                  color: "#000000",
+                  fontWeight: "700",
+                }}
               >
                 ASSINAR AGORA
               </Button>
