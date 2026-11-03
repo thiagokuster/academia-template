@@ -26,7 +26,9 @@ export const Pricing = () => {
         </motion.div>
 
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {plans.map((plan, index) => (
+          {plans.map((plan, index) => {
+            const planUrl = whatsappUrl(planMessage(plan.name, plan.price));
+            return (
             <motion.article
               key={plan.name}
               initial={{ opacity: 0, y: 24 }}
@@ -65,16 +67,13 @@ export const Pricing = () => {
                 variant={plan.featured ? "default" : "outline"}
                 className="mt-8 h-12 w-full font-montserrat text-xs font-semibold uppercase tracking-[0.12em]"
               >
-                <a
-                  href={whatsappUrl(planMessage(plan.name, plan.price))}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={planUrl ?? "#contact"} target={planUrl ? "_blank" : undefined} rel={planUrl ? "noopener noreferrer" : undefined}>
                   Quero este plano
                 </a>
               </Button>
             </motion.article>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

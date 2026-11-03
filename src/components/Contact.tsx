@@ -23,7 +23,12 @@ export const Contact = () => {
 
     const goalLabel = goals.find((item) => item.value === goal)?.label ?? goals[0].label;
     const message = `Olá! Meu nome é ${cleanName}. Quero agendar uma aula experimental. Meu objetivo é ${goalLabel.toLowerCase()}.`;
-    window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    const url = whatsappUrl(message);
+    if (!url) {
+      setError("O WhatsApp da academia ainda não foi configurado.");
+      return;
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
     setError("");
   };
 
@@ -105,12 +110,14 @@ export const Contact = () => {
                   {site.addressLines[1]}
                 </a>
               </li>
-              <li className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-                <a href={`tel:+${site.phoneE164}`} className="font-montserrat text-sm text-muted-foreground hover:text-foreground">
-                  {site.phoneDisplay}
-                </a>
-              </li>
+              {site.phoneE164 ? (
+                <li className="flex items-start gap-3">
+                  <Phone className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                  <a href={`tel:+${site.phoneE164}`} className="font-montserrat text-sm text-muted-foreground hover:text-foreground">
+                    {site.phoneDisplay || site.phoneE164}
+                  </a>
+                </li>
+              ) : null}
               <li className="flex items-start gap-3">
                 <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
                 <a href={`mailto:${site.email}`} className="font-montserrat text-sm text-muted-foreground hover:text-foreground">

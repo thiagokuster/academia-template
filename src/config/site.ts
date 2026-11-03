@@ -5,8 +5,8 @@ export const site = {
   heroTitle: ["Força.", "Técnica.", "Resultado."],
   heroSubtitle:
     "Turmas para todos os níveis, com instrutores faixa-preta. Condicionamento, defesa pessoal e disciplina no mesmo tatame.",
-  phoneDisplay: "(11) 98765-4321",
-  phoneE164: "5511987654321",
+  phoneDisplay: "",
+  phoneE164: "",
   email: "contato@suaacademia.com",
   instagram: "@suaacademia",
   instagramUrl: "https://instagram.com/suaacademia",
@@ -213,7 +213,9 @@ export const navItems = [
 ] as const;
 
 export function whatsappUrl(message: string) {
-  return `https://wa.me/${site.phoneE164}?text=${encodeURIComponent(message)}`;
+  const phone = site.phoneE164.replace(/\D/g, "");
+  if (!phone) return null;
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
 export function planMessage(name: string, price: string) {

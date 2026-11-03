@@ -48,7 +48,7 @@ O que muda de uma academia para outra está em `src/config/site.ts`:
 - `plans`: nomes, preços e o que cada plano inclui
 - `faqs`, `testimonials` e `goals`
 
-O WhatsApp usa `site.phoneE164`, só com dígitos e DDI. O formulário de aula experimental e os botões de plano montam um link `https://wa.me/...` e abrem o aplicativo. Nenhum dado vai para um servidor.
+`site.phoneDisplay` e `site.phoneE164` começam vazios de propósito. Enquanto `phoneE164` estiver vazio, o telefone some da página e nenhum botão abre o WhatsApp. Preencha `phoneE164` só com dígitos e DDI, e `phoneDisplay` com o texto que deve aparecer no contato. O formulário e os planos então montam um link `https://wa.me/...`. Nenhum dado vai para um servidor.
 
 Fotos da hero, da galeria e dos instrutores ficam em `src/assets`. O título da aba fica em `index.html`.
 
