@@ -1,53 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 95%;
+    --background: 0 0% 4%;
+    --foreground: 0 0% 96%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 96%;
 
-    --popover: 0 0% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 96%;
 
-    --primary: 0 0% 20%;
-    --primary-foreground: 0 0% 95%;
+    --primary: 4 84% 52%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary-foreground: 0 0% 96%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 53%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 72%;
 
-    --accent: 0 0% 25%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 4 84% 52%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 0% 30%;
-    --destructive-foreground: 0 0% 95%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 40%;
+    --border: 0 0% 18%;
+    --input: 0 0% 22%;
+    --ring: 4 84% 52%;
 
-    --radius: 0.25rem;
+    --radius: 0.6rem;
   }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   * {
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-montserrat antialiased;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    background: hsl(var(--primary));
+    color: white;
   }
 }

@@ -49,8 +49,8 @@ export default {
         },
       },
       fontFamily: {
-        'bebas': ['Bebas Neue', 'sans-serif'],
-        'montserrat': ['Montserrat', 'sans-serif'],
+        display: ["Oswald", "sans-serif"],
+        montserrat: ["Montserrat", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

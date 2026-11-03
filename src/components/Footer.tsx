@@ -1,52 +1,57 @@
-import { Instagram, Facebook, Youtube } from "lucide-react";
+import { Facebook, Instagram, Youtube } from "lucide-react";
+import { navItems, site } from "@/config/site";
+
+const socials = [
+  { href: site.instagramUrl, label: "Instagram", icon: Instagram },
+  { href: site.facebookUrl, label: "Facebook", icon: Facebook },
+  { href: site.youtubeUrl, label: "YouTube", icon: Youtube },
+];
 
 export const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border py-12">
+    <footer className="border-t border-border bg-background py-12">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <h3 className="font-bebas text-3xl text-foreground tracking-wider mb-2">
-              SUA MARCA
-            </h3>
-            <p className="font-montserrat text-sm text-muted-foreground">
-              Template pronto para personalizacao.
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          <div>
+            <a href="#hero" className="font-display text-3xl font-semibold uppercase tracking-[0.16em] text-foreground">
+              {site.name}
+            </a>
+            <p className="mt-3 max-w-xs font-montserrat text-sm leading-relaxed text-muted-foreground">
+              {site.fullName}. {site.addressLines[0]}.
             </p>
           </div>
 
-          <div className="flex items-center gap-6">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Instagram className="w-6 h-6" />
-            </a>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Facebook className="w-6 h-6" />
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Youtube className="w-6 h-6" />
-            </a>
+          <nav className="flex flex-wrap gap-x-6 gap-y-3" aria-label="Rodapé">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="font-montserrat text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground hover:text-foreground"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            {socials.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+                className="text-muted-foreground transition-colors hover:text-primary"
+              >
+                <item.icon className="h-5 w-5" />
+              </a>
+            ))}
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border text-center">
-          <p className="font-montserrat text-xs text-muted-foreground">
-            © 2026 Sua Marca. Todos os direitos reservados.
-          </p>
-        </div>
+        <p className="mt-10 border-t border-border pt-6 font-montserrat text-xs text-muted-foreground">
+          © {new Date().getFullYear()} {site.fullName}. Todos os direitos reservados.
+        </p>
       </div>
     </footer>
   );

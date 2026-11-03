@@ -1,31 +1,34 @@
-# Template de Site para Academia
+# Forja Kickboxing
 
-Projeto em React + Vite pronto para personalizacao e publicacao no GitHub.
+Landing page de uma academia de kickboxing, com horários, planos, galeria e aula experimental. Textos, preços e contato ficam em `src/config/site.ts`.
 
-## Como executar localmente
+## 🚀 Demo
 
-```sh
-npm install
-npm run dev
-```
+[Abrir localmente](http://localhost:8080) depois de rodar o projeto. Ainda não há deploy público.
 
-## Build de producao
-
-```sh
-npm run build
-npm run preview
-```
-
-## Tecnologias
+## 🛠️ Tecnologias
 
 - React
 - TypeScript
 - Vite
 - Tailwind CSS
 - shadcn/ui
+- Framer Motion
 
-## Personalizacao rapida
+## ✨ Funcionalidades
 
-- Edite textos e secoes em `src/components`.
-- Atualize titulo e metadados em `index.html`.
-- Troque imagens na pasta `src/assets`.
+- Página responsiva, do celular ao desktop
+- Grade de horários por dia
+- Planos com mensagem pronta no WhatsApp
+- Galeria com ampliação das fotos
+- Formulário de aula experimental
+- Perguntas frequentes
+
+## 📦 Como rodar localmente
+
+```bash
+git clone https://github.com/thiagokuster/academia-template.git
+cd academia-template
+npm install
+npm run dev
+```

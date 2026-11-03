@@ -1,114 +1,134 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import { MapPin, Phone, Instagram, Mail } from "lucide-react";
+import { FormEvent, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { Instagram, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { SectionHeading } from "@/components/SectionHeading";
+import { goals, site, whatsappUrl } from "@/config/site";
 
 export const Contact = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [name, setName] = useState("");
+  const [goal, setGoal] = useState<string>(goals[0].value);
+  const [error, setError] = useState("");
+
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const cleanName = name.trim();
+    if (cleanName.length < 2) {
+      setError("Informe seu nome para montarmos a mensagem.");
+      return;
+    }
+
+    const goalLabel = goals.find((item) => item.value === goal)?.label ?? goals[0].label;
+    const message = `Olá! Meu nome é ${cleanName}. Quero agendar uma aula experimental. Meu objetivo é ${goalLabel.toLowerCase()}.`;
+    window.open(whatsappUrl(message), "_blank", "noopener,noreferrer");
+    setError("");
+  };
 
   return (
-    <section id="contact" className="py-24 md:py-32 bg-secondary" ref={ref}>
+    <section id="contact" className="bg-secondary py-24 md:py-32" ref={ref}>
       <div className="container mx-auto px-4">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.55 }}
         >
-          <h2 className="font-bebas text-5xl md:text-7xl text-foreground tracking-wider mb-6">
-            ENTRE EM CONTATO
-          </h2>
-          <p className="font-montserrat text-base md:text-lg text-muted-foreground">
-            Tire suas dúvidas e agende uma aula experimental
-          </p>
+          <SectionHeading
+            eyebrow="Visite a academia"
+            title="Contato"
+            subtitle="Agende a aula experimental pelo formulário ou chame direto no WhatsApp."
+          />
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8"
-          >
-            <div className="flex items-start gap-4">
-              <MapPin className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-bebas text-xl text-foreground tracking-wider mb-2">
-                  ENDEREÇO
-                </h3>
-                <p className="font-montserrat text-sm text-muted-foreground">
-                  Rua dos Lutadores, 123 - Centro<br />
-                  São Paulo, SP - CEP 01234-567
-                </p>
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 lg:grid-cols-2">
+          <div className="space-y-8">
+            <form onSubmit={submit} className="space-y-4 border border-border bg-card p-6" noValidate>
+              <div className="space-y-2">
+                <label htmlFor="nome" className="font-montserrat text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Nome
+                </label>
+                <Input
+                  id="nome"
+                  name="nome"
+                  autoComplete="name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  placeholder="Seu nome"
+                  className="h-12"
+                  aria-invalid={Boolean(error)}
+                  aria-describedby={error ? "nome-erro" : undefined}
+                />
               </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <Phone className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-bebas text-xl text-foreground tracking-wider mb-2">
-                  TELEFONE / WHATSAPP
-                </h3>
-                <p className="font-montserrat text-sm text-muted-foreground">
-                  (11) 98765-4321
-                </p>
+              <div className="space-y-2">
+                <label htmlFor="objetivo" className="font-montserrat text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Objetivo
+                </label>
+                <select
+                  id="objetivo"
+                  name="objetivo"
+                  value={goal}
+                  onChange={(event) => setGoal(event.target.value)}
+                  className="flex h-12 w-full rounded-md border border-input bg-background px-3 font-montserrat text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  {goals.map((item) => (
+                    <option key={item.value} value={item.value}>
+                      {item.label}
+                    </option>
+                  ))}
+                </select>
               </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <Mail className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-bebas text-xl text-foreground tracking-wider mb-2">
-                  E-MAIL
-                </h3>
-                <p className="font-montserrat text-sm text-muted-foreground">
-                  contato@suaacademia.com
+              {error ? (
+                <p id="nome-erro" role="alert" className="font-montserrat text-sm text-primary">
+                  {error}
                 </p>
-              </div>
-            </div>
+              ) : null}
+              <Button type="submit" className="h-12 w-full font-montserrat text-xs font-semibold uppercase tracking-[0.14em]">
+                Quero minha aula experimental
+              </Button>
+            </form>
 
-            <div className="flex items-start gap-4">
-              <Instagram className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="font-bebas text-xl text-foreground tracking-wider mb-2">
-                  INSTAGRAM
-                </h3>
-                <p className="font-montserrat text-sm text-muted-foreground">
-                  @suaacademia
-                </p>
-              </div>
-            </div>
+            <ul className="space-y-5">
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer" className="font-montserrat text-sm leading-relaxed text-muted-foreground hover:text-foreground">
+                  {site.addressLines[0]}
+                  <br />
+                  {site.addressLines[1]}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Phone className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <a href={`tel:+${site.phoneE164}`} className="font-montserrat text-sm text-muted-foreground hover:text-foreground">
+                  {site.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <a href={`mailto:${site.email}`} className="font-montserrat text-sm text-muted-foreground hover:text-foreground">
+                  {site.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Instagram className="mt-0.5 h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
+                <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer" className="font-montserrat text-sm text-muted-foreground hover:text-foreground">
+                  {site.instagram}
+                </a>
+              </li>
+            </ul>
+          </div>
 
-            <Button
-              onClick={() => window.open("https://wa.me/5511987654321", "_blank")}
-              size="lg"
-              className="w-full md:w-auto bg-primary hover:bg-accent font-montserrat font-semibold"
-            >
-              FALE PELO WHATSAPP
-            </Button>
-          </motion.div>
-
-          {/* Map */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="h-[400px] lg:h-full min-h-[400px]"
-          >
+          <div className="min-h-[360px] overflow-hidden border border-border lg:min-h-full">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1976290149454!2d-46.6614!3d-23.5614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMzJzQxLjAiUyA0NsKwMzknNDEuMCJX!5e0!3m2!1spt-BR!2sbr!4v1234567890123!5m2!1spt-BR!2sbr"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: "grayscale(100%) invert(92%) contrast(83%)" }}
-              allowFullScreen
+              src={site.mapsEmbedUrl}
+              title={`Mapa: ${site.fullName}`}
+              className="h-full min-h-[360px] w-full grayscale"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Localização da Academia"
+              allowFullScreen
             />
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

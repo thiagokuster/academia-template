@@ -1,75 +1,70 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { site, stats } from "@/config/site";
 import heroImage from "@/assets/hero-kickboxing.jpg";
 
 export const Hero = () => {
-  const handleCTA = () => {
-    const element = document.querySelector("#contact");
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ 
-          backgroundImage: `url(${heroImage})`,
-          filter: "grayscale(100%)"
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background" />
+    <section id="hero" className="relative flex min-h-[100svh] items-end overflow-hidden">
+      <div className="absolute inset-0">
+        <img
+          src={heroImage}
+          alt=""
+          className="h-full w-full object-cover object-[center_20%]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-background/50" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 text-center">
+      <div className="relative z-10 container mx-auto px-4 pb-10 pt-32 md:pb-14">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.7 }}
+          className="max-w-3xl"
         >
-          <h1 className="font-bebas text-6xl md:text-8xl lg:text-9xl text-foreground tracking-wider mb-4">
-            KICKBOXING PROFISSIONAL
+          <p className="mb-5 font-montserrat text-xs font-semibold uppercase tracking-[0.34em] text-primary">
+            {site.eyebrow}
+          </p>
+          <h1 className="font-display text-6xl font-semibold uppercase leading-[0.88] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+            {site.heroTitle[0]}
+            <br />
+            {site.heroTitle[1]}
+            <br />
+            {site.heroTitle[2].replace(".", "")}
+            <span className="text-primary">.</span>
           </h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="font-montserrat text-xl md:text-2xl text-muted-foreground mb-8 tracking-widest"
-          >
-            TREINO | DISCIPLINA | RESULTADOS
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
-          >
-            <Button
-              onClick={handleCTA}
-              size="lg"
-              className="font-montserrat font-semibold text-lg px-12 py-6 bg-primary hover:bg-accent transition-all duration-300"
-            >
-              QUERO COMEÇAR AGORA
+          <p className="mt-6 max-w-xl font-montserrat text-base leading-relaxed text-muted-foreground md:text-lg">
+            {site.heroSubtitle}
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button asChild size="lg" className="h-12 px-8 font-montserrat text-sm font-semibold uppercase tracking-[0.12em]">
+              <a href="#contact">Aula experimental</a>
             </Button>
-          </motion.div>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="h-12 border-foreground/30 bg-background/40 px-8 font-montserrat text-sm font-semibold uppercase tracking-[0.12em] backdrop-blur-sm hover:bg-primary hover:text-primary-foreground"
+            >
+              <a href="#pricing">Ver planos</a>
+            </Button>
+          </div>
         </motion.div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <div className="w-6 h-10 border-2 border-muted-foreground rounded-full flex justify-center">
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-muted-foreground rounded-full mt-2"
-          />
-        </div>
-      </motion.div>
+        <dl className="mt-14 grid max-w-3xl grid-cols-3 gap-4 border-t border-foreground/15 pt-6">
+          {stats.map((stat) => (
+            <div key={stat.label}>
+              <dt className="font-display text-3xl font-semibold uppercase tracking-tight text-foreground md:text-4xl">
+                {stat.value}
+              </dt>
+              <dd className="mt-1 font-montserrat text-xs leading-snug text-muted-foreground md:text-sm">
+                {stat.label}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </section>
   );
 };
