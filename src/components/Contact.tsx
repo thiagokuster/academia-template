@@ -38,7 +38,7 @@ export const Contact = () => {
           <SectionHeading
             eyebrow="Visite a academia"
             title="Contato"
-            subtitle="Agende a aula experimental pelo formulário ou chame direto no WhatsApp."
+            subtitle="Preencha o nome e o objetivo. O formulário só abre o WhatsApp, sem salvar os dados."
           />
         </motion.div>
 
@@ -84,8 +84,15 @@ export const Contact = () => {
                   {error}
                 </p>
               ) : null}
-              <Button type="submit" className="h-12 w-full font-montserrat text-xs font-semibold uppercase tracking-[0.14em]">
-                Quero minha aula experimental
+              <p id="form-destino" className="font-montserrat text-xs leading-relaxed text-muted-foreground">
+                O botão abre o WhatsApp da academia com a mensagem pronta. Nada é enviado a um servidor.
+              </p>
+              <Button
+                type="submit"
+                className="h-12 w-full font-montserrat text-xs font-semibold uppercase tracking-[0.14em]"
+                aria-describedby="form-destino"
+              >
+                Abrir conversa no WhatsApp
               </Button>
             </form>
 
